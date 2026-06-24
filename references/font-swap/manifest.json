@@ -1,0 +1,8 @@
+{
+  "name": "Tiger FontSwap",
+  "id": "tiger-fontswap-2026",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"]
+}
