@@ -26,6 +26,8 @@ description: 老虎活动物料 Figma 尺寸延展规范与执行流程。把一
 - 繁体中文 → **Source Han Sans HK**（思源黑体繁/港；注意 TC 在云端不可用，繁体一律用 HK）
 - 英文 → **Roboto**
 - 字重：主标题 **Heavy**、副标题 **Medium**、正文/合规 **Regular**、标签/按钮 **Bold**
+- **行高**：主标题、副标题一律 **130%**（lineHeight PERCENT 130）。
+- **主副间距**：主标题与副标题之间垂直间距固定 **20px**（副标题 top = 主标题 bottom + 20）。以上两条适用所有尺寸、所有物料。
 - 思源 CN/HK 在云端 `use_figma` 可直接 `loadFontAsync` 应用，**默认无需任何插件**。
 - 仅当用户**明确要求苹方 / MiSans** 时，才用本 skill 附带的本地字体插件落地（见 `references/font-swap/`）。
 
