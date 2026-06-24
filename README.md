@@ -5,25 +5,24 @@
 ## 这是什么
 一个 **Claude Code Skill**。装好后，在 Claude Code 里对任意 Figma 源稿说「按规范延展」或直接输入 `/figma-size-extension`，Claude 会按统一规范执行。
 
-## 安装（每位同事一次）
-把整个 `figma-size-extension/` 文件夹放进 Claude Code 的 skills 目录其一：
-- 个人全局（推荐）：`~/.claude/skills/figma-size-extension/`
-- 某项目内：`<项目>/.claude/skills/figma-size-extension/`
-
+## 安装（推荐：克隆即更新）
+**直接把仓库 clone 到 skills 目录**，以后 `git pull` 就能同步最新规范（不要用 cp 复制，复制后无法 pull 更新）：
 ```bash
-# 示例：装到个人全局
-cp -R figma-size-extension ~/.claude/skills/
+git clone https://github.com/MARE9292/figma-size-extension.git ~/.claude/skills/figma-size-extension
 ```
-重启 / 重开 Claude Code 后，输入 `/` 应能看到 `figma-size-extension`。
+重开 Claude Code，输入 `/` 应能看到 `figma-size-extension`。
+> 备选：`./install.sh` 会复制安装（适合不想用 git 的同事，但失去自动更新能力）。
 
-## 协作分发（保持规范一致的关键）
-把这个文件夹放进**共享 Git 仓库**（或飞书云盘），所有人从同一来源安装/更新：
-```bash
-# 团队仓库示例
-git clone <团队设计规范仓库> && cp -R 团队设计规范仓库/skills/figma-size-extension ~/.claude/skills/
-# 规范更新后，重新拉取覆盖即可，全员一致
-```
-> 规范有任何修改，只改这一个文件夹并推到共享仓库；同事更新后即同步，杜绝口口相传走样。
+## 同步更新（新增/修改延展尺寸后）
+**单一源头 = 本 GitHub 仓库。** 流程：
+1. 维护者改 `SKILL.md`（增尺寸/改规则）+ `references/spec.md`（数值细节），如涉及苹方/MiSans 新帧名再改 `references/font-swap/code.js` 的 `FRAME_LANG`。
+2. `git commit -m "feat: 新增尺寸 XxY" && git push`。
+3. **同事一行命令同步**：
+   ```bash
+   cd ~/.claude/skills/figma-size-extension && git pull
+   ```
+   重开 Claude Code 生效。
+> 维护者同时需同步另两处：Claude 记忆（`figma_size_extension.md`）与飞书《设计延展规范》文档，保证四处一致。交给 Claude 处理时，只需说一句「新增尺寸 X，规则 Y」，它会改这四处并推送。
 
 ## 用法
 1. 在 Claude Code 里贴 Figma 源稿链接（带 node-id 最好）。
