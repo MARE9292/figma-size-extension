@@ -4,29 +4,28 @@
   body { font: 12px -apple-system, "PingFang SC", sans-serif; margin: 0; padding: 16px; color: #1a1a1a; }
   h3 { margin: 0 0 4px; font-size: 13px; }
   .hint { color: #888; font-size: 11px; margin-bottom: 12px; line-height: 1.5; }
-  .hint b { color: #f5a623; }
   .row { display: flex; gap: 10px; margin-bottom: 8px; }
   button { flex: 1; padding: 12px 0; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
   .pf { background: #1a1a1a; color: #ffe100; }
   .ms { background: #ffe100; color: #1a1a1a; }
   .dg { background: #eee; color: #333; font-size: 12px; padding: 8px 0; }
   button:hover { opacity: .88; }
-  #status { margin-top: 10px; font-size: 11px; color: #333; min-height: 60px; line-height: 1.6; word-break: break-all; background:#f7f7f7; border-radius:6px; padding:8px; }
+  #status { margin-top: 10px; font-size: 11px; color: #333; min-height: 56px; line-height: 1.6; word-break: break-all; background:#f7f7f7; border-radius:6px; padding:8px; }
 </style></head>
 <body>
   <h3>Tiger FontSwap</h3>
-  <div class="hint">Claude 指定：<b id="req">—</b>　已应用：<span id="app">—</span><br>先点「诊断」确认本机能枚举到 MiSans/苹方，再切换。</div>
+  <div class="hint">自动识别延展帧（活动中心-1035x368 / 弹窗-900x1200），按后缀切语言字体。当前已应用：<b id="app">—</b><br>先点「诊断」确认本机/账号能枚举到目标字体，再切换。</div>
   <div class="row">
-    <button class="pf" onclick="send('apply','PingFang')">苹方</button>
-    <button class="ms" onclick="send('apply','MiSans')">MiSans</button>
+    <button class="pf" onclick="send('apply','PingFang')">切苹方</button>
+    <button class="ms" onclick="send('apply','MiSans')">切 MiSans</button>
   </div>
-  <div class="row"><button class="dg" onclick="send('diagnose')">🔍 诊断：列出本机 MiSans/苹方 字体名</button></div>
+  <div class="row"><button class="dg" onclick="send('diagnose')">🔍 诊断：列出可用 MiSans/苹方 字体</button></div>
   <div id="status">等待操作…</div>
   <script>
     function send(type, mode){ document.getElementById('status').textContent='处理中…'; parent.postMessage({pluginMessage:{type:type,mode:mode}}, '*'); }
     onmessage = (e) => {
       const m = e.data.pluginMessage; if(!m) return;
-      if (m.type === 'init') { document.getElementById('req').textContent=m.requested; document.getElementById('app').textContent=m.applied; }
+      if (m.type === 'init') { document.getElementById('app').textContent = m.applied; }
       if (m.type === 'done') { document.getElementById('status').textContent = m.msg; }
     };
   </script>
